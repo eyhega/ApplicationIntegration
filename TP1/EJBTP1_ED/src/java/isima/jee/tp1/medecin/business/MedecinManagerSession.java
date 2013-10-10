@@ -4,7 +4,7 @@
  */
 package isima.jee.tp1.medecin.business;
 
-import isima.jee.tp1.medecin.entity.MedecinEntity;
+import isima.jee.tp1.medecin.dal.MedecinEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
