@@ -4,7 +4,7 @@
  */
 package isima.jee.tp1.medecin.business;
 
-import isima.jee.tp1.medecin.dal.MedecinEntity;
+import isima.jee.tp1.medecin.DAO.MedecinEntity;
 import java.util.List;
 import javax.ejb.Local;
 

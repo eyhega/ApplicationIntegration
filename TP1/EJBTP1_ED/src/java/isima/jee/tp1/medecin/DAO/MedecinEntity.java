@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package isima.jee.tp1.medecin.dal;
+package isima.jee.tp1.medecin.DAO;
 
 import java.io.Serializable;
 import javax.persistence.Column;
