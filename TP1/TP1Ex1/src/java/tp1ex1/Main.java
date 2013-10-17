@@ -5,8 +5,10 @@
 package tp1ex1;
 
 import java.util.List;
+import tp1ex1.biz.AppointmentManager;
 import tp1ex1.biz.MedecinManager;
 import tp1ex1.biz.PatientManager;
+import tp1ex1.dao.Appointment;
 import tp1ex1.dao.Medecin;
 import tp1ex1.dao.Patient;
 
@@ -21,7 +23,18 @@ public class Main {
      */
     public static void main(String[] args) {
         //testMedecin();
-        testPatient();
+        //testPatient();
+        testAppointment();
+    }
+    
+    private static void testAppointment() {
+        List<Appointment> app = null;
+        
+        app = AppointmentManager.getInstance().findAll();
+        
+        for(Appointment a : app) {
+            System.out.println(a);
+        }
     }
     
     private static void testPatient() {

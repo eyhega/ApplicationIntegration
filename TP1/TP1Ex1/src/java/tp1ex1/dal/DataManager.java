@@ -81,8 +81,7 @@ public class DataManager {
         
         inStatement.executeUpdate();
         rs = inStatement.getGeneratedKeys();
-
-        // particulierement PRATIQUE
+        
         if (rs.next()) {
             id = rs.getInt(1);
         }

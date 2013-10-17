@@ -72,10 +72,8 @@ public class MedecinManager extends ObjectManager<Medecin> {
             } else {
                 this.insert(inMedecin);
             }
-
-            return inMedecin;
         } catch (Exception ex) {
-            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Medecin Object int the DB.", ex);
+            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Medecin Object in the DB.", ex);
         }
         return inMedecin;
     }

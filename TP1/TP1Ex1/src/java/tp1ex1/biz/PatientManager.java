@@ -60,7 +60,7 @@ public class PatientManager extends ObjectManager<Patient> {
                 this.insert(objectToSave);
             }
         } catch (Exception ex) {
-            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Patient Object int the DB.", ex);
+            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Patient Object in the DB.", ex);
         }
 
         return objectToSave;
@@ -131,8 +131,6 @@ public class PatientManager extends ObjectManager<Patient> {
             lst = buildListFromResultSet(rs);
             ps.close();
             rs.close();
-
-            return (!lst.isEmpty());
         } catch (Exception ex) {
             Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, "Can not test if the current Patient exists.", ex);
         }
