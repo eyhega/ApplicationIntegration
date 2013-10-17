@@ -4,7 +4,6 @@
  */
 package tp1ex1.dal;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +20,9 @@ import javax.sql.DataSource;
  */
 public class DataManager {
     
+    /**
+     * Connection chain
+     */
     private static final String JDBC_JNDI = "jdbc/base_medecin_ed_JNDI";
     private DataSource  dataSource = null;
     private static DataManager  instance = null;
@@ -36,16 +38,17 @@ public class DataManager {
     private DataManager()
     {
         try {
-            dataSource = (DataSource)new InitialContext().lookup(JDBC_JNDI);
+            InitialContext initContext = new InitialContext();
+            dataSource = (DataSource)initContext.lookup(JDBC_JNDI);
         } catch (NamingException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     /**
-     * Standard queries
-     * @param inPreQuery
-     * @return
+     * Standard queries (like select...)
+     * @param inPreQuery The query as a String 
+     * @return The PrepareStatement associated
      * @throws SQLException 
      */
     public synchronized PreparedStatement   buildStatement(String inPreQuery) throws SQLException
@@ -54,9 +57,9 @@ public class DataManager {
     }
     
     /**
-     * 
-     * @param inPreQuery
-     * @return
+     * Build a preparedSatement for an insert query which required auto incrementation.
+     * @param inPreQuery The insert query as String
+     * @return The preparedStatement object based on the query
      * @throws Exception 
      */
     public synchronized PreparedStatement   buildInsertAutoInc(String inPreQuery) throws Exception
@@ -66,9 +69,9 @@ public class DataManager {
     }
     
     /**
-     * 
-     * @param inStatement
-     * @return
+     * Execute an Update query which required auto incrementation
+     * @param inStatement The preparedStatement object which contains the query
+     * @return The generated ID
      * @throws SQLException 
      */
     public synchronized int                  doUpdateAutoInc(PreparedStatement inStatement) throws SQLException
@@ -80,17 +83,18 @@ public class DataManager {
         rs = inStatement.getGeneratedKeys();
 
         // particulierement PRATIQUE
-        if (rs.next())
+        if (rs.next()) {
             id = rs.getInt(1);
-
+        }
+            
         rs.close();
         
         return id;
     }
     
     /**
-     * 
-     * @param inStatement
+     * Execute an UpDate query from a PreparedStatement
+     * @param inStatement The object which contains the query
      * @throws Exception 
      */
     public synchronized void                doUpdate(PreparedStatement inStatement) throws Exception
@@ -99,9 +103,9 @@ public class DataManager {
     }
     
     /**
-     * 
-     * @param inStatement
-     * @return
+     * Execute a query.
+     * @param inStatement The preparedStatement which contains the simple query
+     * @return The result as a resultSet object.
      * @throws Exception 
      */
     public synchronized ResultSet           doExecute(PreparedStatement inStatement) throws Exception

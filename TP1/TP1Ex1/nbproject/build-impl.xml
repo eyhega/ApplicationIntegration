@@ -781,15 +781,18 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="compile" if="is.server.weblogic" name="library-inclusion-in-archive">
         <basename file="${file.reference.mysql-connector-java-5.1.25-bin.jar}" property="manifest.file.reference.mysql-connector-java-5.1.25-bin.jar"/>
+        <basename file="${file.reference.mysql-connector-java-5.1.25-bin.jar-1}" property="manifest.file.reference.mysql-connector-java-5.1.25-bin.jar-1"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 "/>
+            <attribute name="Extension-List" value="jar-1 jar-2 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar}"/>
+            <attribute name="jar-2-Extension-Name" value="${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar-1}"/>
         </manifest>
     </target>
     <target depends="compile" if="dist.ear.dir" name="library-inclusion-in-manifest">
         <copyfiles files="${file.reference.mysql-connector-java-5.1.25-bin.jar}" manifestproperty="manifest.file.reference.mysql-connector-java-5.1.25-bin.jar" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.mysql-connector-java-5.1.25-bin.jar-1}" manifestproperty="manifest.file.reference.mysql-connector-java-5.1.25-bin.jar-1" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar} lib/${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar} "/>
+            <attribute name="Class-Path" value="${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar} lib/${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar} ${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar-1} lib/${manifest.file.reference.mysql-connector-java-5.1.25-bin.jar-1} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">

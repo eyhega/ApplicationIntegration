@@ -12,6 +12,7 @@
                 <root id="test.src.dir" name="Test Packages"/>
             </test-roots>
             <included-library dirs="200">file.reference.mysql-connector-java-5.1.25-bin.jar</included-library>
+            <included-library dirs="200">file.reference.mysql-connector-java-5.1.25-bin.jar-1</included-library>
         </data>
     </configuration>
 </project>
