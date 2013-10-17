@@ -6,7 +6,9 @@ package tp1ex1;
 
 import java.util.List;
 import tp1ex1.biz.MedecinManager;
+import tp1ex1.biz.PatientManager;
 import tp1ex1.dao.Medecin;
+import tp1ex1.dao.Patient;
 
 /**
  *
@@ -18,61 +20,65 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //testMedecin();
+        testPatient();
+    }
+    
+    private static void testPatient() {
+        List<Patient> patients = null;
         
-        try
-        {
-            List<Medecin>   meds;
-            
-            meds = MedecinManager.getInstance().findAll();
-            for (Medecin m : meds)
-            {
-                System.out.println(m.toString());
-            }
-            
-            
-            
-            Medecin mi = new Medecin();
-            
-            mi.setNom("Li");
-            mi.setPrenom("JJ");
-            mi.setTitre("Mme");
-            mi.setVersion(1);
-            System.out.println("ADD LI");
-            MedecinManager.getInstance().save(mi);
-            
-            meds = MedecinManager.getInstance().findAll();
-            for (Medecin m : meds)
-            {
-                System.out.println(m.toString());
-            }
-            
-            System.out.println("CHANGE LI => LIT");
-            
-            mi.setNom("Lit");
-            MedecinManager.getInstance().save(mi);
-            
-            meds = MedecinManager.getInstance().findAll();
-            for (Medecin m : meds)
-            {
-                System.out.println(m.toString());
-            }
-            
-            System.out.println("DEL LIT");
-            
-            MedecinManager.getInstance().delete(mi);
-            
-            meds = MedecinManager.getInstance().findAll();
-            for (Medecin m : meds)
-            {
-                System.out.println(m.toString());
-            }
-            
+        patients = PatientManager.getInstance().findAll();
+        
+        for(Patient p : patients) {
+            System.out.println(p);
         }
-        catch (Exception e)
+    }
+
+    private static void testMedecin() {
+        List<Medecin>   meds;
+        
+        meds = MedecinManager.getInstance().findAll();
+        for (Medecin m : meds)
         {
-            e.printStackTrace(System.err);
+            System.out.println(m.toString());
         }
         
         
+        
+        Medecin mi = new Medecin();
+        
+        mi.setNom("Li");
+        mi.setPrenom("JJ");
+        mi.setTitre("Mme");
+        mi.setVersion(1);
+        System.out.println("ADD LI");
+        MedecinManager.getInstance().save(mi);
+        
+        meds = MedecinManager.getInstance().findAll();
+        for (Medecin m : meds)
+        {
+            System.out.println(m.toString());
+        }
+        
+        System.out.println("CHANGE LI => LIT");
+        
+        mi.setNom("Lit");
+        MedecinManager.getInstance().save(mi);
+        
+        meds = MedecinManager.getInstance().findAll();
+        for (Medecin m : meds)
+        {
+            System.out.println(m.toString());
+        }
+        
+        System.out.println("DEL LIT");
+        
+        MedecinManager.getInstance().delete(mi);
+        
+        meds = MedecinManager.getInstance().findAll();
+        for (Medecin m : meds)
+        {
+            System.out.println(m.toString());
+        }
     }
 }

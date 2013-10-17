@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.w3c.dom.ls.LSException;
 import tp1ex1.dal.DataManager;
 import tp1ex1.dao.Patient;
 
@@ -23,7 +22,7 @@ public class PatientManager extends ObjectManager<Patient> {
 
     private static PatientManager instance = null;
 
-    public synchronized PatientManager getInstance() {
+    public static synchronized PatientManager getInstance() {
         if (instance == null) {
             instance = new PatientManager();
         }
@@ -42,7 +41,7 @@ public class PatientManager extends ObjectManager<Patient> {
         List<Patient> patientList = null;
 
         try {
-            rs = dm.doExecute(dm.buildStatement("SELECT * FROM CLIENTS;"));
+            rs = dm.doExecute(dm.buildStatement("SELECT * FROM clients;"));
             patientList = buildListFromResultSet(rs);
             rs.close();
         } catch (Exception ex) {
@@ -71,7 +70,7 @@ public class PatientManager extends ObjectManager<Patient> {
     protected void update(Patient objectToUpdate) {
         try {
             PreparedStatement ps = DataManager.getInstance().buildStatement(
-                    "UPDATE CLIENS SET  version = ?,titre = ?,nom = ?,prenom = ? WHERE id = ?;");
+                    "UPDATE clients SET  version = ?,titre = ?,nom = ?,prenom = ? WHERE id = ?;");
 
             ps.setInt(1, objectToUpdate.getVersion());
             ps.setString(2, objectToUpdate.getTitre());
@@ -89,7 +88,7 @@ public class PatientManager extends ObjectManager<Patient> {
     protected void insert(Patient objectToInsert) {
         try {
             PreparedStatement ps = DataManager.getInstance().buildInsertAutoInc(
-                    "INSERT INTO ClIENTS (version, titre, nom, prenom)"
+                    "INSERT INTO clients (version, titre, nom, prenom)"
                     + " VALUES (?, ?, ?, ?);");
 
             ps.setInt(1, objectToInsert.getVersion());
@@ -108,7 +107,7 @@ public class PatientManager extends ObjectManager<Patient> {
         if (exists(objectToDelete)) {
             try {
                 DataManager dm = DataManager.getInstance();
-                PreparedStatement ps = dm.buildStatement("DELETE from CLIENTS WHERE id = ?;");
+                PreparedStatement ps = dm.buildStatement("DELETE from clients WHERE id = ?;");
                 ps.setInt(1, objectToDelete.getId());
                 dm.doUpdate(ps);
                 ps.close();
@@ -125,7 +124,7 @@ public class PatientManager extends ObjectManager<Patient> {
         List<Patient> lst = null;
         try {
 
-            PreparedStatement ps = dm.buildStatement("SELECT * from CLIENTS WHERE ID = ?;");
+            PreparedStatement ps = dm.buildStatement("SELECT * from clients WHERE ID = ?;");
 
             ps.setInt(1, objectToTest.getId());
             rs = dm.doExecute(ps);
