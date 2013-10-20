@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp1ex1.biz;
+package tp1ex1.business;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,27 +41,15 @@ public class AppointmentManager extends ObjectManager<Appointment>{
         List<Appointment> appointmentList = null;
         
         try {
-            rs = dm.doExecute(dm.buildStatement("SELECT * FROM rv;"));
+            PreparedStatement buildStatement = dm.buildStatement("SELECT * FROM rv;");
+            rs = dm.doExecute(buildStatement);
             appointmentList =buildListFromResultSet(rs);
             rs.close();
+            buildStatement.close();
         } catch(Exception ex) {
             Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not get all the Appointements.", ex);
         } 
         return appointmentList;
-    }
-
-    @Override
-    public Appointment save(Appointment objectToSave) {
-        try {
-            if (exists(objectToSave)) {
-                this.update(objectToSave);
-            } else {
-                this.insert(objectToSave);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Appointment Object in the DB.", ex);
-        }
-        return objectToSave;
     }
 
     @Override
@@ -72,7 +60,7 @@ public class AppointmentManager extends ObjectManager<Appointment>{
 
             ps.setDate(1, objectToUpdate.getJour());
             ps.setInt(2, objectToUpdate.getIdPatient());
-            ps.setInt(3, objectToUpdate.getIdCreneau());
+            ps.setInt(3, objectToUpdate.getIdTimeSlot());
             ps.setInt(4, objectToUpdate.getId());
             DataManager.getInstance().doUpdate(ps);
             ps.close();
@@ -90,7 +78,7 @@ public class AppointmentManager extends ObjectManager<Appointment>{
 
             ps.setDate(1, objectToInsert.getJour());
             ps.setInt(2, objectToInsert.getIdPatient());
-            ps.setInt(3, objectToInsert.getIdCreneau());
+            ps.setInt(3, objectToInsert.getIdTimeSlot());
             objectToInsert.setId(DataManager.getInstance().doUpdateAutoInc(ps));
             ps.close();
         } catch (Exception ex) {
@@ -138,7 +126,7 @@ public class AppointmentManager extends ObjectManager<Appointment>{
 
     @Override
     protected List<Appointment> buildListFromResultSet(ResultSet inResultSet) {
-         List<Appointment> lst = new ArrayList<Appointment>();
+        List<Appointment> lst = new ArrayList<Appointment>();
         try {
             while (inResultSet.next()) {
                 Appointment app = new Appointment();
@@ -146,7 +134,7 @@ public class AppointmentManager extends ObjectManager<Appointment>{
                 app.setId(inResultSet.getInt("id"));
                 app.setJour(inResultSet.getDate("jour"));
                 app.setIdPatient(inResultSet.getInt("id_client"));
-                app.setIdCreneau(inResultSet.getInt("id_creneau"));
+                app.setIdTimeSlot(inResultSet.getInt("id_creneau"));
                 
                 lst.add(app);
             }

@@ -4,6 +4,7 @@
  */
 package tp1ex1.dal;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ public class DataManager {
     private static final String JDBC_JNDI = "jdbc/base_medecin_ed_JNDI";
     private DataSource  dataSource = null;
     private static DataManager  instance = null;
+    private Connection currentConnection = null;
     
     public static synchronized DataManager  getInstance()
     {
@@ -40,7 +42,10 @@ public class DataManager {
         try {
             InitialContext initContext = new InitialContext();
             dataSource = (DataSource)initContext.lookup(JDBC_JNDI);
+            currentConnection = dataSource.getConnection();
         } catch (NamingException ex) {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -53,7 +58,10 @@ public class DataManager {
      */
     public synchronized PreparedStatement   buildStatement(String inPreQuery) throws SQLException
     {
-        return dataSource.getConnection().prepareStatement(inPreQuery);
+        if(currentConnection == null) {
+            currentConnection = dataSource.getConnection();
+        }
+        return currentConnection.prepareStatement(inPreQuery);
     }
     
     /**
@@ -64,7 +72,11 @@ public class DataManager {
      */
     public synchronized PreparedStatement   buildInsertAutoInc(String inPreQuery) throws Exception
     {
-        return dataSource.getConnection().prepareStatement(inPreQuery, 
+        if(currentConnection == null) {
+            currentConnection = dataSource.getConnection();
+        }
+        
+        return currentConnection.prepareStatement(inPreQuery, 
                 Statement.RETURN_GENERATED_KEYS);
     }
     
@@ -114,5 +126,13 @@ public class DataManager {
         rs = inStatement.executeQuery();
         
         return rs;
+    }
+    
+    public void closeConnection() {
+        try {
+            currentConnection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE,"Can not clause the connection", ex);
+        }
     }
 }

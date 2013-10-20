@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp1ex1.biz;
+package tp1ex1.business;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,31 +41,18 @@ public class PatientManager extends ObjectManager<Patient> {
         List<Patient> patientList = null;
 
         try {
-            rs = dm.doExecute(dm.buildStatement("SELECT * FROM clients;"));
+            PreparedStatement buildStatement = dm.buildStatement("SELECT * FROM clients;");
+            rs = dm.doExecute(buildStatement);
             patientList = buildListFromResultSet(rs);
             rs.close();
+            buildStatement.close();
         } catch (Exception ex) {
             Logger.getLogger(PatientManager.class.getName()).log(Level.SEVERE, "Can not get all the Clients.", ex);
         }
 
         return patientList;
     }
-
-    @Override
-    public Patient save(Patient objectToSave) {
-        try {
-            if (exists(objectToSave)) {
-                this.update(objectToSave);
-            } else {
-                this.insert(objectToSave);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Patient Object in the DB.", ex);
-        }
-
-        return objectToSave;
-    }
-
+    
     @Override
     protected void update(Patient objectToUpdate) {
         try {

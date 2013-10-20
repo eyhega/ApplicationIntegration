@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp1ex1.biz;
+package tp1ex1.business;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,9 +45,11 @@ public class MedecinManager extends ObjectManager<Medecin> {
         List<Medecin> lst = null;
 
         try {
-            rs = dm.doExecute(dm.buildStatement("SELECT * from medecins;"));
+            PreparedStatement buildStatement = dm.buildStatement("SELECT * from medecins;");
+            rs = dm.doExecute(buildStatement);
             lst = buildListFromResultSet(rs);
             rs.close();
+            buildStatement.close();
         } catch (Exception ex) {
             Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not get all the Medecin.", ex);
         }
@@ -55,39 +57,17 @@ public class MedecinManager extends ObjectManager<Medecin> {
         return lst;
     }
 
-    /**
-     * If inMedecin exists in db, then its status is saved, if it does not exist
-     * then it's created into db, in this case, id is overwritten from
-     * auto-generated value of ('fucking ?') db.
-     *
-     * @param inMedecin
-     * @return A reference on the inMedecin updated instance (for id set in
-     * create case).
-     */
-    @Override
-    public synchronized Medecin save(Medecin inMedecin) {
-        try {
-            if (exists(inMedecin)) {
-                this.update(inMedecin);
-            } else {
-                this.insert(inMedecin);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not save the Medecin Object in the DB.", ex);
-        }
-        return inMedecin;
-    }
-
     @Override
     protected void update(Medecin inMedecin) {
         try {
+            String buildStatement = "UPDATE medecins"
+                                    + " SET  version = ?"
+                                    + ",    titre = ?"
+                                    + ",    nom = ?"
+                                    + ",    prenom = ?"
+                                    + " WHERE id = ?;";
             PreparedStatement ps = DataManager.getInstance().buildStatement(
-                    "UPDATE medecins"
-                    + " SET  version = ?"
-                    + ",    titre = ?"
-                    + ",    nom = ?"
-                    + ",    prenom = ?"
-                    + " WHERE id = ?;");
+                    buildStatement);
 
             ps.setInt(1, inMedecin.getVersion());
             ps.setString(2, inMedecin.getTitre());
@@ -96,6 +76,7 @@ public class MedecinManager extends ObjectManager<Medecin> {
             ps.setInt(5, inMedecin.getId());
             DataManager.getInstance().doUpdate(ps);
             ps.close();
+            
         } catch (Exception ex) {
             Logger.getLogger(MedecinManager.class.getName()).log(Level.SEVERE, "Can not update the current Medecin.", ex);
         }

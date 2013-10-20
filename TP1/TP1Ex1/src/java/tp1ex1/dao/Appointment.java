@@ -19,16 +19,16 @@ public class Appointment implements Serializable {
     
     private Date jour;
     
-    private int idCreaneau;
+    private int idTimeSlot;
 
     private int idPatient;
 
-    public int getIdCreneau() {
-        return idCreaneau;
+    public int getIdTimeSlot() {
+        return idTimeSlot;
     }
 
-    public void setIdCreneau(int idMedecin) {
-        this.idCreaneau = idMedecin;
+    public void setIdTimeSlot(int idMedecin) {
+        this.idTimeSlot = idMedecin;
     }
 
     public int getIdPatient() {
@@ -88,7 +88,7 @@ public class Appointment implements Serializable {
 
     @Override
     public String toString() {
-        return " Appointment[ id=" + id + "jour=" + jour +"]";
+        return " Appointment[ id=" + id + " jour=" + jour +" idPatient="+idPatient +" idTimeSlot=" + idTimeSlot + "]";
     }
     
 }
