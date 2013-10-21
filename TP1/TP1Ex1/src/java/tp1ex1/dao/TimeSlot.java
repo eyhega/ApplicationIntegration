@@ -42,13 +42,14 @@ public class TimeSlot implements Serializable {
         this.id = id;
     }
 
-    public TimeSlot(int id, int version, int hdebut, int mdebut, int hfin, int mfin) {
+    public TimeSlot(int id, int version, int hdebut, int mdebut, int hfin, int mfin, int idMedecin) {
         this.id = id;
         this.version = version;
         this.hdebut = hdebut;
         this.mdebut = mdebut;
         this.hfin = hfin;
         this.mfin = mfin;
+        this.idMedecin = idMedecin;
     }
 
     public int getId() {

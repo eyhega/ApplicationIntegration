@@ -42,7 +42,9 @@ public class Main {
         testAll();
     }
     
-    
+    /**
+     * Execute a demo for all entities
+     */
     private static void testAll() {
         Medecin med = new Medecin();
         testGeneric(MedecinManager.getInstance(),med);
@@ -57,6 +59,13 @@ public class Main {
         testGeneric(TimeSlotManager.getInstance(), ts);
     }
     
+    /**
+     * Execute a demo for one entity.
+     * @param <T> The manager type
+     * @param <U> The Entity type
+     * @param managerInstance The managerInstance
+     * @param entity  The entity to test.
+     */
     private static <T extends ObjectManager,U> void testGeneric(T managerInstance,U entity) {
         
         System.out.println("*------DEMO FOR "+ entity.getClass().getName() + " Entity class------*");
@@ -81,7 +90,11 @@ public class Main {
         System.out.println("*------END DEMO FOR "+ entity.getClass().getName() + " Entity class------*");
     }
     
-    
+    /**
+     * Change the value of a random field.
+     * @param <U> The Entity type.
+     * @param entity The entity object
+     */
     private static <U> void setRandomField(U entity) {
         Field[] fields = entity.getClass().getDeclaredFields();
         int randomField = (int) (Math.random()*fields.length);
@@ -110,6 +123,11 @@ public class Main {
         }
     }
     
+    /**
+     * Permit to fill an entity with pre-selectioned values.
+     * @param <T> The entity type.
+     * @param entity the entity object.
+     */
     private static <T> void fillEntity(T entity) {
         Field[] fields = entity.getClass().getDeclaredFields();
         
@@ -142,7 +160,11 @@ public class Main {
         }
     }
     
-    
+    /**
+     * Get a generic data following its type
+     * @param type The data type.
+     * @return The generated value.
+     */
     private static Object getGenericData(Class<?> type) {
         Object toReturn = null;
         
@@ -157,6 +179,11 @@ public class Main {
         return toReturn;
     }
     
+    /**
+     * Get a generic data to apply changes, following its type
+     * @param type The data type.
+     * @return The generated value.
+     */
     private static Object getGenericChangedData(Class<?> type) {
         Object toReturn = null;
         
@@ -171,6 +198,12 @@ public class Main {
         return toReturn;
     }
 
+    /**
+     * Get back all the objects from the database through the manager.
+     * @param <T> The Manager type.
+     * @param <U> The Entity type.
+     * @param managerInstance The managerInstance.
+     */
     private static <T extends ObjectManager, U> void displayObjects(T managerInstance) {
         List<U> list = null;
         list = managerInstance.findAll();

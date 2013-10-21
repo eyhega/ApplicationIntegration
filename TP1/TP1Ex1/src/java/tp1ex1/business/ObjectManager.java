@@ -9,17 +9,50 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * Specifications for ObjectManager
  * @author Gaetan
+ * @param <T> The Entity type.
  */
 public abstract class ObjectManager<T> {
     
+    /**
+     * Find all the tuples in the table and return a collection of entity filled.
+     * @return the collection set.
+     */
     public abstract List<T> findAll();
+    
+    /**
+     * Update an existing tuple in the database.
+     * @param objectToUpdate The entity object which contains data.
+     */
     protected abstract void update(T objectToUpdate);
+    
+    /**
+     * Insert a new tuple in the database.
+     * @param objectToInsert The object to insert.
+     */
     protected abstract void insert(T objectToInsert);
+    
+    /**
+     * Delete an existing tuple from the database.
+     * @param objectToDelete The entity object to delete.
+     */
     public abstract void delete(T objectToDelete);
+    
+    /**
+     * Check if a tuple exists in the database.
+     * @param objectToTest The entity object to test.
+     * @return True if the tuple has been found, False otherwise.
+     */
     public abstract boolean exists(T objectToTest);
+    
+    /**
+     * Build an Entity Collection from a ResultSet.
+     * @param inResultSet The ResulSet object which contains data (tuples)
+     * @return An entity collection filled.
+     */
     protected abstract List<T> buildListFromResultSet(ResultSet inResultSet);
     
     /**
