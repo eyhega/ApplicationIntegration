@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp2.DAO;
+package tp2.jpa;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author eyheramo
  */
 @Entity
-@Table(name = "clients")
+@Table(name = "medecins")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Clients.findAll", query = "SELECT c FROM Clients c"),
-    @NamedQuery(name = "Clients.findById", query = "SELECT c FROM Clients c WHERE c.id = :id"),
-    @NamedQuery(name = "Clients.findByVersion", query = "SELECT c FROM Clients c WHERE c.version = :version"),
-    @NamedQuery(name = "Clients.findByTitre", query = "SELECT c FROM Clients c WHERE c.titre = :titre"),
-    @NamedQuery(name = "Clients.findByNom", query = "SELECT c FROM Clients c WHERE c.nom = :nom"),
-    @NamedQuery(name = "Clients.findByPrenom", query = "SELECT c FROM Clients c WHERE c.prenom = :prenom")})
-public class Clients implements Serializable {
+    @NamedQuery(name = "Medecins.findAll", query = "SELECT m FROM Medecins m"),
+    @NamedQuery(name = "Medecins.findById", query = "SELECT m FROM Medecins m WHERE m.id = :id"),
+    @NamedQuery(name = "Medecins.findByVersion", query = "SELECT m FROM Medecins m WHERE m.version = :version"),
+    @NamedQuery(name = "Medecins.findByTitre", query = "SELECT m FROM Medecins m WHERE m.titre = :titre"),
+    @NamedQuery(name = "Medecins.findByNom", query = "SELECT m FROM Medecins m WHERE m.nom = :nom"),
+    @NamedQuery(name = "Medecins.findByPrenom", query = "SELECT m FROM Medecins m WHERE m.prenom = :prenom")})
+public class Medecins implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -70,20 +70,20 @@ public class Clients implements Serializable {
     @Column(name = "PRENOM")
     private String prenom;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    private Collection<Rv> rvCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedecin")
+    private Collection<Creneaux> creneauxCollection;
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy= "idClient")
-    private transient List<Rv> rvList;
+    @OneToMany(cascade= CascadeType.ALL, mappedBy= "idMedecin")
+    private transient List<Creneaux> creneauxList;
     
-    public Clients() {
+    public Medecins() {
     }
 
-    public Clients(Long id) {
+    public Medecins(Long id) {
         this.id = id;
     }
 
-    public Clients(Long id, int version, String titre, String nom, String prenom) {
+    public Medecins(Long id, int version, String titre, String nom, String prenom) {
         this.id = id;
         this.version = version;
         this.titre = titre;
@@ -132,12 +132,12 @@ public class Clients implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Rv> getRvCollection() {
-        return rvCollection;
+    public Collection<Creneaux> getCreneauxCollection() {
+        return creneauxCollection;
     }
 
-    public void setRvCollection(Collection<Rv> rvCollection) {
-        this.rvCollection = rvCollection;
+    public void setCreneauxCollection(Collection<Creneaux> creneauxCollection) {
+        this.creneauxCollection = creneauxCollection;
     }
 
     @Override
@@ -150,10 +150,10 @@ public class Clients implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Clients)) {
+        if (!(object instanceof Medecins)) {
             return false;
         }
-        Clients other = (Clients) object;
+        Medecins other = (Medecins) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -162,7 +162,7 @@ public class Clients implements Serializable {
 
     @Override
     public String toString() {
-        return "tp2.DAO.Clients[ id=" + id + " ]";
+        return "tp2.DAO.Medecins[ id=" + id + " ]";
     }
     
 }

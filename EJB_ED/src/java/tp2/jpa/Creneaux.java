@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tp2.DAO;
+package tp2.jpa;
 
 import java.io.Serializable;
 import java.util.Collection;

@@ -4,13 +4,10 @@
  */
 package tp2.DAO;
 
-import javax.ejb.Local;
-
 /**
  *
  * @author eyheramo
  */
-@Local
-public interface IDaoLocal {
+public class DaoJPA {
     
 }

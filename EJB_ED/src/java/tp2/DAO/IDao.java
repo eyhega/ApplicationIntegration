@@ -17,11 +17,15 @@ import javax.persistence.PersistenceContext;
 @Stateless(mappedName="Interface")
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class IDao implements IDaoLocal {
+
     
     @PersistenceContext
     private EntityManager em;
     
     
-    //ajouter les méthodes
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    
+    
     
 }
