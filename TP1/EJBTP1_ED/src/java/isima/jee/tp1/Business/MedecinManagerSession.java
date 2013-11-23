@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package isima.jee.tp1.medecin.business;
+package isima.jee.tp1.Business;
 
-import isima.jee.tp1.medecin.DAO.MedecinEntity;
+import isima.jee.tp1.DAO.MedecinEntity;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

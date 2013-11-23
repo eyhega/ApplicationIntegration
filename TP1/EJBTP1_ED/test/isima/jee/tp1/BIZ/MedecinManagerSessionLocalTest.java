@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package isima.jee.tp1.medecin.business;
+package isima.jee.tp1.BIZ;
 
 import isima.jee.tp1.medecin.DAO.MedecinEntity;
+import isima.jee.tp1.Business.MedecinManagerSessionLocal;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

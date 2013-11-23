@@ -4,7 +4,7 @@
  */
 package isima.jee.tp1.medecin.usage;
 
-import isima.jee.tp1.medecin.business.MedecinManagerSessionLocal;
+import isima.jee.tp1.Business.MedecinManagerSessionLocal;
 import javax.ejb.EJB;
 
 /**
