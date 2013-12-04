@@ -71,11 +71,8 @@ public class Medecins implements Serializable {
     private String prenom;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedecin")
-    private Collection<Creneaux> creneauxCollection;
+    private transient Collection<Creneaux> creneauxCollection;
 
-    @OneToMany(cascade= CascadeType.ALL, mappedBy= "idMedecin")
-    private transient List<Creneaux> creneauxList;
-    
     public Medecins() {
     }
 

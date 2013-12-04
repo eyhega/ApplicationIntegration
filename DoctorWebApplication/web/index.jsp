@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <% 
-        request.getRequestDispatcher("/MainServlet").forward(request, response);
-        %>
+        <ul>
+            <li><a href="./MainServlet">Lister les medecins</a></li>
+            <li><a href="./InsertRvServlet">Ajouter un rendez-vous</a></li>
+        </ul>
     </body>
 </html>

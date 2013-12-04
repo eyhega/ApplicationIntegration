@@ -67,10 +67,6 @@ public class IDao implements IDaoLocal {
         List<Creneaux>    creneaux = (List<Creneaux>)m.getCreneauxCollection();
         List<Rv>          rdvs = new ArrayList<Rv>();
         
-        /*
-         * Boucle de rdvs en O n2 moisie honteux pour jee 2013 
-         * 
-         */
         for (Creneaux c : creneaux)
         {
             List<Rv>        rvs = (List<Rv>)c.getRvCollection();
@@ -95,6 +91,11 @@ public class IDao implements IDaoLocal {
     public void removeRv(Long idRv) {
         
         daoRv.remove(daoRv.find(idRv));
+    }
+
+    @Override
+    public List<Clients> getAllClients() {
+        return daoClients.findAll();
     }
     
     

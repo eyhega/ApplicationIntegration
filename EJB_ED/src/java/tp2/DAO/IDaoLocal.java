@@ -21,6 +21,8 @@ public interface IDaoLocal {
     
     List<Medecins> getAllMedecins();
     
+    List<Clients> getAllClients();
+    
     List<Creneaux> getCreneauxForMedecins(Long idMedecin);
     
     List<Rv> getRvForMedecinAndDate(Medecins m,Date date);
