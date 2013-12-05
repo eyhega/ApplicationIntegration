@@ -100,9 +100,10 @@ public class IDao implements IDaoLocal {
     }
 
     @Override
-    public void addRv(Date date, Long idClient, Long idCreneaux) {
-        
-        daoRv.create(new Rv(date, daoClients.find(idClient), daoCreneaux.find(idCreneaux)));
+    public Rv addRv(Date date, Long idClient, Long idCreneaux) {
+        Rv toCreate = new Rv(date, daoClients.find(idClient), daoCreneaux.find(idCreneaux));
+        daoRv.create(toCreate);
+        return toCreate;
     }
 
     @Override

@@ -4,6 +4,7 @@
     Author     : eyheramo
 --%>
 
+<%@page import="tp2.jpa.Rv"%>
 <%@page import="tp2.jpa.Creneaux"%>
 <%@page import="tp2.jpa.Clients"%>
 <%@page import="tp2.jpa.Medecins"%>
@@ -110,6 +111,22 @@
                 
         <%
             }
+            else if(action.equals("finalize")) {
+                Rv currentRv = (Rv)request.getAttribute("rv");
         %>
+        
+        Le rendez-vous a bien ete enregistre.<br/>
+        Recapitulatif:
+        <ul>
+            <li>Nom du medecin : <% out.print(currentRv.getIdCreneau().getIdMedecin().getNom() + " " + currentRv.getIdCreneau().getIdMedecin().getPrenom()); %></li>
+            <li>Nom du client  : <% out.print(currentRv.getIdClient().getNom() + " "  + currentRv.getIdClient().getPrenom()); %></li>
+            <li>Date           : <% out.print(currentRv.getJour().toString()); %></li>
+            <li>Creneau        : <% out.print(currentRv.getIdCreneau().getHdebut()+"h"+currentRv.getIdCreneau().getMdebut()+" a " + currentRv.getIdCreneau().getHfin()+"h"+currentRv.getIdCreneau().getMfin()); %></li>
+        </ul>
+        
+         <%
+            }
+        %>
+        
     </body>
 </html>

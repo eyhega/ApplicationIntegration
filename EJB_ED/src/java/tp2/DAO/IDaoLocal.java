@@ -29,7 +29,7 @@ public interface IDaoLocal {
     
     //List<Rv> getRvForMedecinAndDate(Medecins m,Date date);
     
-    void     addRv(Date date, Long  clients, Long creneaux);
+    Rv     addRv(Date date, Long  clients, Long creneaux);
     void     removeRv(Long idRv);
     
 }

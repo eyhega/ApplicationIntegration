@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import tp2.DAO.IDaoLocal;
 import tp2.jpa.Creneaux;
 import tp2.jpa.Medecins;
+import tp2.jpa.Rv;
 
 /**
  *
@@ -76,7 +77,6 @@ public class InsertRvServlet extends HttpServlet {
         
         //create session and set different attributes
         HttpSession session = request.getSession(true);
-        session.setAttribute("idMedecin", idMedecin);
         Date date = new Date(annee, mois, jour);
         session.setAttribute("date", date);
         
@@ -129,7 +129,17 @@ public class InsertRvServlet extends HttpServlet {
     }// </editor-fold>
 
     private void saveRV(HttpServletRequest request, HttpServletResponse response) {
-        Long idClient = Long.getLong(request.getParameter("client"));
+        Long idClient = Long.parseLong(request.getParameter("client"));
+        Long idCreneau  = Long.parseLong(request.getParameter("creneau"));
+        
+        //get back the data from Session
+        HttpSession session = request.getSession();
+        Date date = (Date) session.getAttribute("date");
+        session.invalidate();
+        
+        Rv newRv = dao.addRv(date, idClient, idCreneau);
+        request.setAttribute("rv",newRv);
+        request.setAttribute("action","finalize");
     }
 
 }
