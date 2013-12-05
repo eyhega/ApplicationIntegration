@@ -4,6 +4,7 @@
     Author     : eyheramo
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page import="tp2.jpa.Rv"%>
 <%@page import="tp2.jpa.Creneaux"%>
 <%@page import="tp2.jpa.Clients"%>
@@ -92,7 +93,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Choisir le creneau selon vos disponibilies:</td>
+                    <td>Choisir le creneau selon vos disponibilitees:</td>
                     <td>
                         <select name="creneau">
                             <%
@@ -120,7 +121,10 @@
         <ul>
             <li>Nom du medecin : <% out.print(currentRv.getIdCreneau().getIdMedecin().getNom() + " " + currentRv.getIdCreneau().getIdMedecin().getPrenom()); %></li>
             <li>Nom du client  : <% out.print(currentRv.getIdClient().getNom() + " "  + currentRv.getIdClient().getPrenom()); %></li>
-            <li>Date           : <% out.print(currentRv.getJour().toString()); %></li>
+            <li>Date           : <% 
+            Calendar c= Calendar.getInstance();
+            c.setTime(currentRv.getJour());
+            out.print(c.get(Calendar.DAY_OF_MONTH) + "/" + (c.get(Calendar.MONTH)+1) + "/" + c.get(Calendar.YEAR)); %></li>
             <li>Creneau        : <% out.print(currentRv.getIdCreneau().getHdebut()+"h"+currentRv.getIdCreneau().getMdebut()+" a " + currentRv.getIdCreneau().getHfin()+"h"+currentRv.getIdCreneau().getMfin()); %></li>
         </ul>
         

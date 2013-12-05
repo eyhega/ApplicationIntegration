@@ -5,7 +5,8 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -77,7 +78,10 @@ public class InsertRvServlet extends HttpServlet {
         
         //create session and set different attributes
         HttpSession session = request.getSession(true);
-        Date date = new Date(annee, mois, jour);
+        Calendar c= Calendar.getInstance();
+        c.setTimeInMillis(0);
+        c.set(annee, (mois - 1), jour);
+        Date date = new Date(c.getTimeInMillis());
         session.setAttribute("date", date);
         
         //set attributes for JSP page
