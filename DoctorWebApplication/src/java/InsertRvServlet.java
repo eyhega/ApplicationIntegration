@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import tp2.DAO.IDaoLocal;
 import tp2.jpa.Creneaux;
 import tp2.jpa.Medecins;
@@ -68,9 +69,19 @@ public class InsertRvServlet extends HttpServlet {
     
     
     protected void handleDataAndPrepareCreneauForm(HttpServletRequest request, HttpServletResponse response) {
-        Long idMedecin = Long.getLong(request.getParameter("medecin"));
-        request.setAttribute("idMedecin",idMedecin);
-        request.setAttribute("creneaux",dao.getCreneauxForMedecins(idMedecin));
+        Long idMedecin = Long.parseLong(request.getParameter("medecin"));
+        Integer jour = Integer.parseInt(request.getParameter("jour"));
+        Integer mois = Integer.parseInt(request.getParameter("mois"));
+        Integer annee = Integer.parseInt(request.getParameter("annee"));
+        
+        //create session and set different attributes
+        HttpSession session = request.getSession(true);
+        session.setAttribute("idMedecin", idMedecin);
+        Date date = new Date(annee, mois, jour);
+        session.setAttribute("date", date);
+        
+        //set attributes for JSP page
+        request.setAttribute("creneaux",dao.getFreeCreneauxForMedecinsAndDate(idMedecin,date));
         request.setAttribute("clients", dao.getAllClients());
         request.setAttribute("action","choisirCreneau");
     }
@@ -119,9 +130,6 @@ public class InsertRvServlet extends HttpServlet {
 
     private void saveRV(HttpServletRequest request, HttpServletResponse response) {
         Long idClient = Long.getLong(request.getParameter("client"));
-        Integer jour = Integer.getInteger(request.getParameter("jour"));
-        Integer mois = Integer.getInteger(request.getParameter("mois"));
-        Integer annee = Integer.getInteger(request.getParameter("annee"));
     }
 
 }

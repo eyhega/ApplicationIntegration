@@ -5,6 +5,7 @@
 package tp2.jpa;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
@@ -71,7 +72,7 @@ public class Medecins implements Serializable {
     private String prenom;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMedecin")
-    private transient Collection<Creneaux> creneauxCollection;
+    private List<Creneaux> creneauxCollection;
 
     public Medecins() {
     }
@@ -129,11 +130,12 @@ public class Medecins implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Creneaux> getCreneauxCollection() {
+    public List<Creneaux> getCreneauxCollection() {
         return creneauxCollection;
     }
-
-    public void setCreneauxCollection(Collection<Creneaux> creneauxCollection) {
+    
+    @XmlTransient
+    public void setCreneauxCollection(List<Creneaux> creneauxCollection) {
         this.creneauxCollection = creneauxCollection;
     }
 

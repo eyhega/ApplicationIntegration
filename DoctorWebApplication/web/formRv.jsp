@@ -20,7 +20,7 @@
             String action = (String)request.getAttribute("action");
             if(action.equals("choisirMed")) {
             %>
-            <form method="POST" name="formRv">
+            <form method="POST">
             <input type="hidden" name="action" value="getCreneaux" />
             <table>
                 <tr>
@@ -36,21 +36,6 @@
                         </select>
                     </td>
                 </tr>
-                <tr><td><input type="submit" value="Chercher les creneaux"/></td></tr>
-            </table>
-        </form>
-        <%
-            }
-            else if(action.equals("choisirCreneau")){
-        %>
-        
-        <form method="POST" name="formRv">
-            <% 
-                Long idMedecin = (Long)request.getAttribute("idMedecin");
-                out.print("<input type=\"hidden\" name=\"medecin\" value=\"" + idMedecin + "\" />");
-            %>
-            <input type="hidden" name="action" value="saveRv" />
-            <table>
                 <tr>
                     <td>Date du rendez-vous</td>
                     <td>Jour/Mois/Annee</td>
@@ -77,10 +62,21 @@
                                 for(int i = 2014 ; i <= 2020 ; ++i) {
                                     out.println("<option value=\""+i+"\">" + i + "</option>");
                                 }
-                                %>
+                            %>
                         </select>
                     </td>
                 </tr>
+                <tr><td><input type="submit" value="Chercher les creneaux"/></td></tr>
+            </table>
+        </form>
+        <%
+            }
+            else if(action.equals("choisirCreneau")){
+        %>
+        
+        <form method="POST">
+            <input type="hidden" name="action" value="saveRv" />
+            <table>
                 <tr>
                     <td>Choisissez le nom du client:</td>
                     <td>

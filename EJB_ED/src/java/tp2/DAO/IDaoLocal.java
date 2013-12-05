@@ -25,7 +25,9 @@ public interface IDaoLocal {
     
     List<Creneaux> getCreneauxForMedecins(Long idMedecin);
     
-    List<Rv> getRvForMedecinAndDate(Medecins m,Date date);
+    List<Creneaux> getFreeCreneauxForMedecinsAndDate(Long idMedecin,Date date);
+    
+    //List<Rv> getRvForMedecinAndDate(Medecins m,Date date);
     
     void     addRv(Date date, Long  clients, Long creneaux);
     void     removeRv(Long idRv);

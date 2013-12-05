@@ -71,10 +71,7 @@ public class Clients implements Serializable {
     private String prenom;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-    private Collection<Rv> rvCollection;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy= "idClient")
-    private transient List<Rv> rvList;
+    private List<Rv> rvCollection;
     
     public Clients() {
     }
@@ -130,13 +127,14 @@ public class Clients implements Serializable {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-
+    
     @XmlTransient
-    public Collection<Rv> getRvCollection() {
+    public List<Rv> getRvCollection() {
         return rvCollection;
     }
-
-    public void setRvCollection(Collection<Rv> rvCollection) {
+    
+    @XmlTransient
+    public void setRvCollection(List<Rv> rvCollection) {
         this.rvCollection = rvCollection;
     }
 

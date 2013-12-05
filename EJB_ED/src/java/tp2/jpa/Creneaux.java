@@ -79,10 +79,7 @@ public class Creneaux implements Serializable {
     private Medecins idMedecin;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCreneau")
-    private Collection<Rv> rvCollection;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy= "idCreneau")
-    private transient List<Rv> rvList;
+    private List<Rv> rvCollection;
     
     public Creneaux() {
     }
@@ -148,20 +145,23 @@ public class Creneaux implements Serializable {
         this.mfin = mfin;
     }
 
+    @XmlTransient
     public Medecins getIdMedecin() {
         return idMedecin;
     }
 
+    @XmlTransient
     public void setIdMedecin(Medecins idMedecin) {
         this.idMedecin = idMedecin;
     }
 
     @XmlTransient
-    public Collection<Rv> getRvCollection() {
+    public List<Rv> getRvCollection() {
         return rvCollection;
     }
 
-    public void setRvCollection(Collection<Rv> rvCollection) {
+    @XmlTransient
+    public void setRvCollection(List<Rv> rvCollection) {
         this.rvCollection = rvCollection;
     }
 

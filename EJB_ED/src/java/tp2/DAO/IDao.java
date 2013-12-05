@@ -59,17 +59,17 @@ public class IDao implements IDaoLocal {
     
     @Override
     public List<Creneaux> getCreneauxForMedecins(Long idMedecin) {
-        return (List<Creneaux>)daoMedecin.find(idMedecin).getCreneauxCollection();
+        return daoMedecin.find(idMedecin).getCreneauxCollection();
     }
     
-    @Override
+   /* @Override
     public List<Rv> getRvForMedecinAndDate(Medecins m,Date date) {
-        List<Creneaux>    creneaux = (List<Creneaux>)m.getCreneauxCollection();
+        List<Creneaux>    creneaux = m.getCreneauxCollection();
         List<Rv>          rdvs = new ArrayList<Rv>();
         
         for (Creneaux c : creneaux)
         {
-            List<Rv>        rvs = (List<Rv>)c.getRvCollection();
+            List<Rv>        rvs = c.getRvCollection();
             
             for (Rv rv : rvs)
             {
@@ -79,6 +79,24 @@ public class IDao implements IDaoLocal {
         }
         
         return rdvs;
+    }*/
+    
+    @Override
+    public List<Creneaux> getFreeCreneauxForMedecinsAndDate(Long idMedecin,Date date) {
+        
+        List<Rv> allRv = daoRv.findAll();
+        Medecins currentMed = daoMedecin.find(idMedecin);
+        List<Creneaux> creneaux = currentMed.getCreneauxCollection();
+        
+        for(Rv r : allRv) {
+            if(r.getJour().equals(date)) {
+                if(r.getIdCreneau().getIdMedecin().equals(currentMed)) {
+                    creneaux.remove(r.getIdCreneau());
+                }
+            }
+        }
+        
+        return creneaux;
     }
 
     @Override
