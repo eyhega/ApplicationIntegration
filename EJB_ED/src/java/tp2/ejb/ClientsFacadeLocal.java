@@ -4,6 +4,7 @@
  */
 package tp2.ejb;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Local;
 import tp2.jpa.Clients;
@@ -13,7 +14,7 @@ import tp2.jpa.Clients;
  * @author eyheramo
  */
 @Local
-public interface ClientsFacadeLocal {
+public interface ClientsFacadeLocal extends Serializable {
 
     void create(Clients clients);
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCreneauxTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_id}"/>
+                    <h:outputText value="#{creneauxController.selected.id}" title="#{bundle.ViewCreneauxTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_version}"/>
+                    <h:outputText value="#{creneauxController.selected.version}" title="#{bundle.ViewCreneauxTitle_version}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_hdebut}"/>
+                    <h:outputText value="#{creneauxController.selected.hdebut}" title="#{bundle.ViewCreneauxTitle_hdebut}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_mdebut}"/>
+                    <h:outputText value="#{creneauxController.selected.mdebut}" title="#{bundle.ViewCreneauxTitle_mdebut}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_hfin}"/>
+                    <h:outputText value="#{creneauxController.selected.hfin}" title="#{bundle.ViewCreneauxTitle_hfin}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_mfin}"/>
+                    <h:outputText value="#{creneauxController.selected.mfin}" title="#{bundle.ViewCreneauxTitle_mfin}"/>
+                    <h:outputText value="#{bundle.ViewCreneauxLabel_idMedecin}"/>
+                    <h:outputText value="#{creneauxController.selected.idMedecin}" title="#{bundle.ViewCreneauxTitle_idMedecin}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{creneauxController.destroyAndView}" value="#{bundle.ViewCreneauxDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCreneauxEditLink}"/>
+                <br />
+                <h:commandLink action="#{creneauxController.prepareCreate}" value="#{bundle.ViewCreneauxCreateLink}" />
+                <br />
+                <h:commandLink action="#{creneauxController.prepareList}" value="#{bundle.ViewCreneauxShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCreneauxIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

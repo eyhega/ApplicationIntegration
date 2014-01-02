@@ -6,6 +6,7 @@ package tp2.ejb;
 
 import java.sql.Date;
 import java.util.List;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,9 +29,4 @@ public class RvFacade extends AbstractFacade<Rv> implements RvFacadeLocal {
     public RvFacade() {
         super(Rv.class);
     }
-
-
-    
-    
-    
 }

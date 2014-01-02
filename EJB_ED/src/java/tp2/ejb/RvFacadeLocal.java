@@ -5,6 +5,7 @@
 package tp2.ejb;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.Local;
@@ -16,7 +17,7 @@ import tp2.jpa.Rv;
  * @author eyheramo
  */
 @Local
-public interface RvFacadeLocal {
+public interface RvFacadeLocal extends Serializable {
 
     void create(Rv rv);
 

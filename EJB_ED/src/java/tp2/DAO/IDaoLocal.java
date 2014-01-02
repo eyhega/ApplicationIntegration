@@ -4,6 +4,7 @@
  */
 package tp2.DAO;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
@@ -17,7 +18,7 @@ import tp2.jpa.Rv;
  * @author eyheramo
  */
 @Local
-public interface IDaoLocal {
+public interface IDaoLocal extends Serializable {
     
     List<Medecins> getAllMedecins();
     

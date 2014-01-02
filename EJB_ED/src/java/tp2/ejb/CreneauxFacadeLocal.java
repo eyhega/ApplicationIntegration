@@ -4,6 +4,7 @@
  */
 package tp2.ejb;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Local;
 import tp2.jpa.Creneaux;
@@ -14,7 +15,7 @@ import tp2.jpa.Medecins;
  * @author eyheramo
  */
 @Local
-public interface CreneauxFacadeLocal {
+public interface CreneauxFacadeLocal extends Serializable {
 
     void create(Creneaux creneaux);
 

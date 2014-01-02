@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListClientsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListClientsEmpty}" rendered="#{clientsController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{clientsController.items.rowCount > 0}">
+                <h:outputText value="#{clientsController.pagination.pageFirstItem + 1}..#{clientsController.pagination.pageLastItem + 1}/#{clientsController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{clientsController.previous}" value="#{bundle.Previous} #{clientsController.pagination.pageSize}" rendered="#{clientsController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{clientsController.next}" value="#{bundle.Next} #{clientsController.pagination.pageSize}" rendered="#{clientsController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{clientsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientsTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientsTitle_version}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.version}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientsTitle_titre}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientsTitle_nom}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nom}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListClientsTitle_prenom}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.prenom}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{clientsController.prepareView}" value="#{bundle.ListClientsViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{clientsController.prepareEdit}" value="#{bundle.ListClientsEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{clientsController.destroy}" value="#{bundle.ListClientsDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{clientsController.prepareCreate}" value="#{bundle.ListClientsCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListClientsIndexLink}"/>
+        </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

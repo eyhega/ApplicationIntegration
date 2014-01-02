@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMedecinsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMedecinsLabel_id}"/>
+                    <h:outputText value="#{medecinsController.selected.id}" title="#{bundle.ViewMedecinsTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewMedecinsLabel_version}"/>
+                    <h:outputText value="#{medecinsController.selected.version}" title="#{bundle.ViewMedecinsTitle_version}"/>
+                    <h:outputText value="#{bundle.ViewMedecinsLabel_titre}"/>
+                    <h:outputText value="#{medecinsController.selected.titre}" title="#{bundle.ViewMedecinsTitle_titre}"/>
+                    <h:outputText value="#{bundle.ViewMedecinsLabel_nom}"/>
+                    <h:outputText value="#{medecinsController.selected.nom}" title="#{bundle.ViewMedecinsTitle_nom}"/>
+                    <h:outputText value="#{bundle.ViewMedecinsLabel_prenom}"/>
+                    <h:outputText value="#{medecinsController.selected.prenom}" title="#{bundle.ViewMedecinsTitle_prenom}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{medecinsController.destroyAndView}" value="#{bundle.ViewMedecinsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMedecinsEditLink}"/>
+                <br />
+                <h:commandLink action="#{medecinsController.prepareCreate}" value="#{bundle.ViewMedecinsCreateLink}" />
+                <br />
+                <h:commandLink action="#{medecinsController.prepareList}" value="#{bundle.ViewMedecinsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMedecinsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditRvTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditRvLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{rvController.selected.id}" title="#{bundle.EditRvTitle_id}" required="true" requiredMessage="#{bundle.EditRvRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditRvLabel_jour}" for="jour" />
+                    <h:inputText id="jour" value="#{rvController.selected.jour}" title="#{bundle.EditRvTitle_jour}" required="true" requiredMessage="#{bundle.EditRvRequiredMessage_jour}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditRvLabel_idClient}" for="idClient" />
+                    <h:selectOneMenu id="idClient" value="#{rvController.selected.idClient}" title="#{bundle.EditRvTitle_idClient}" required="true" requiredMessage="#{bundle.EditRvRequiredMessage_idClient}">
+                        <f:selectItems value="#{clientsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditRvLabel_idCreneau}" for="idCreneau" />
+                    <h:selectOneMenu id="idCreneau" value="#{rvController.selected.idCreneau}" title="#{bundle.EditRvTitle_idCreneau}" required="true" requiredMessage="#{bundle.EditRvRequiredMessage_idCreneau}">
+                        <f:selectItems value="#{creneauxController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{rvController.update}" value="#{bundle.EditRvSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditRvViewLink}"/>
+                <br />
+                <h:commandLink action="#{rvController.prepareList}" value="#{bundle.EditRvShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditRvIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

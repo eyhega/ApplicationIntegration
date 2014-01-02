@@ -33,7 +33,7 @@ import tp2.jpa.Rv;
 public class IDao implements IDaoLocal {
 
     
-    @PersistenceContext
+    @PersistenceContext(unitName = "EJB_EDPU")
     private EntityManager em;
     
     

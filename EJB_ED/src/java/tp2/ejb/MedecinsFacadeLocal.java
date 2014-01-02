@@ -4,6 +4,7 @@
  */
 package tp2.ejb;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Local;
 import tp2.jpa.Medecins;
@@ -13,7 +14,7 @@ import tp2.jpa.Medecins;
  * @author eyheramo
  */
 @Local
-public interface MedecinsFacadeLocal {
+public interface MedecinsFacadeLocal extends Serializable {
 
     void create(Medecins medecins);
 

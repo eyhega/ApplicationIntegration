@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRvTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListRvEmpty}" rendered="#{rvController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{rvController.items.rowCount > 0}">
+                    <h:outputText value="#{rvController.pagination.pageFirstItem + 1}..#{rvController.pagination.pageLastItem + 1}/#{rvController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{rvController.previous}" value="#{bundle.Previous} #{rvController.pagination.pageSize}" rendered="#{rvController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{rvController.next}" value="#{bundle.Next} #{rvController.pagination.pageSize}" rendered="#{rvController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{rvController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRvTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRvTitle_jour}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.jour}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRvTitle_idClient}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idClient}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRvTitle_idCreneau}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCreneau}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{rvController.prepareView}" value="#{bundle.ListRvViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{rvController.prepareEdit}" value="#{bundle.ListRvEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{rvController.destroy}" value="#{bundle.ListRvDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{rvController.prepareCreate}" value="#{bundle.ListRvCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListRvIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

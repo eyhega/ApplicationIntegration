@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCreneauxTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{creneauxController.selected.id}" title="#{bundle.EditCreneauxTitle_id}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_version}" for="version" />
+                    <h:inputText id="version" value="#{creneauxController.selected.version}" title="#{bundle.EditCreneauxTitle_version}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_version}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_hdebut}" for="hdebut" />
+                    <h:inputText id="hdebut" value="#{creneauxController.selected.hdebut}" title="#{bundle.EditCreneauxTitle_hdebut}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_hdebut}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_mdebut}" for="mdebut" />
+                    <h:inputText id="mdebut" value="#{creneauxController.selected.mdebut}" title="#{bundle.EditCreneauxTitle_mdebut}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_mdebut}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_hfin}" for="hfin" />
+                    <h:inputText id="hfin" value="#{creneauxController.selected.hfin}" title="#{bundle.EditCreneauxTitle_hfin}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_hfin}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_mfin}" for="mfin" />
+                    <h:inputText id="mfin" value="#{creneauxController.selected.mfin}" title="#{bundle.EditCreneauxTitle_mfin}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_mfin}"/>
+                    <h:outputLabel value="#{bundle.EditCreneauxLabel_idMedecin}" for="idMedecin" />
+                    <h:selectOneMenu id="idMedecin" value="#{creneauxController.selected.idMedecin}" title="#{bundle.EditCreneauxTitle_idMedecin}" required="true" requiredMessage="#{bundle.EditCreneauxRequiredMessage_idMedecin}">
+                        <f:selectItems value="#{medecinsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{creneauxController.update}" value="#{bundle.EditCreneauxSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCreneauxViewLink}"/>
+                <br />
+                <h:commandLink action="#{creneauxController.prepareList}" value="#{bundle.EditCreneauxShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCreneauxIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
