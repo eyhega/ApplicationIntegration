@@ -1,8 +1,8 @@
-package zz.beans;
+package zz.controllers;
 
 import tp2.jpa.Rv;
-import zz.beans.util.JsfUtil;
-import zz.beans.util.PaginationHelper;
+import zz.controllers.util.JsfUtil;
+import zz.controllers.util.PaginationHelper;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -16,7 +16,6 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import tp2.ejb.RvFacade;
 import tp2.ejb.RvFacadeLocal;
 
 @Named("rvController")
@@ -27,7 +26,7 @@ public class RvController implements Serializable {
     private DataModel items = null;
 
     @EJB
-    private RvFacadeLocal ejbFacade;
+    private transient RvFacadeLocal ejbFacade;
     
     private PaginationHelper pagination;
     private int selectedItemIndex;

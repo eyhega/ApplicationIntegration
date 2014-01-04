@@ -1,8 +1,8 @@
-package zz.beans;
+package zz.controllers;
 
 import tp2.jpa.Creneaux;
-import zz.beans.util.JsfUtil;
-import zz.beans.util.PaginationHelper;
+import zz.controllers.util.JsfUtil;
+import zz.controllers.util.PaginationHelper;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -26,7 +26,7 @@ public class CreneauxController implements Serializable {
     private Creneaux current;
     private DataModel items = null;
     @EJB
-    private CreneauxFacadeLocal ejbFacade;
+    private transient CreneauxFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

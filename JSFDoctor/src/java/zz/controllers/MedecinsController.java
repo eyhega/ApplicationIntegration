@@ -1,8 +1,8 @@
-package zz.beans;
+package zz.controllers;
 
-import tp2.jpa.Clients;
-import zz.beans.util.JsfUtil;
-import zz.beans.util.PaginationHelper;
+import tp2.jpa.Medecins;
+import zz.controllers.util.JsfUtil;
+import zz.controllers.util.PaginationHelper;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -16,34 +16,32 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import tp2.ejb.ClientsFacade;
-import tp2.ejb.ClientsFacadeLocal;
+import tp2.ejb.MedecinsFacade;
+import tp2.ejb.MedecinsFacadeLocal;
 
-@Named("clientsController")
+@Named("medecinsController")
 @SessionScoped
-public class ClientsController implements Serializable {
+public class MedecinsController implements Serializable {
 
-    private Clients current;
+    private Medecins current;
     private DataModel items = null;
-    
     @EJB
-    private ClientsFacadeLocal ejbFacade;
-    
+    private transient MedecinsFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public ClientsController() {
+    public MedecinsController() {
     }
 
-    public Clients getSelected() {
+    public Medecins getSelected() {
         if (current == null) {
-            current = new Clients();
+            current = new Medecins();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private ClientsFacadeLocal getFacade() {
+    private MedecinsFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -70,13 +68,13 @@ public class ClientsController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Clients) getItems().getRowData();
+        current = (Medecins) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Clients();
+        current = new Medecins();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,7 +82,7 @@ public class ClientsController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ClientsCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MedecinsCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -93,7 +91,7 @@ public class ClientsController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Clients) getItems().getRowData();
+        current = (Medecins) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -101,7 +99,7 @@ public class ClientsController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ClientsUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MedecinsUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -110,7 +108,7 @@ public class ClientsController implements Serializable {
     }
 
     public String destroy() {
-        current = (Clients) getItems().getRowData();
+        current = (Medecins) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -134,7 +132,7 @@ public class ClientsController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ClientsDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("MedecinsDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -190,21 +188,21 @@ public class ClientsController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Clients getClients(java.lang.Long id) {
+    public Medecins getMedecins(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Clients.class)
-    public static class ClientsControllerConverter implements Converter {
+    @FacesConverter(forClass = Medecins.class)
+    public static class MedecinsControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ClientsController controller = (ClientsController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "clientsController");
-            return controller.getClients(getKey(value));
+            MedecinsController controller = (MedecinsController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "medecinsController");
+            return controller.getMedecins(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -224,11 +222,11 @@ public class ClientsController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Clients) {
-                Clients o = (Clients) object;
+            if (object instanceof Medecins) {
+                Medecins o = (Medecins) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Clients.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Medecins.class.getName());
             }
         }
     }

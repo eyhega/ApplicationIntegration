@@ -8,11 +8,11 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.JSFDoctor.dist-ear}</file>
+                    <file>${reference.EJBDoctor.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.EJBDoctor.dist-ear}</file>
+                    <file>${reference.JSFDoctor.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>
