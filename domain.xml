@@ -1,0 +1,12 @@
+<domain log-root="${com.sun.aas.instanceRoot}/logs" application-root="${com.sun.aas.instanceRoot}/applications" version="5">
+  <resources>
+    <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="DBMEDPool">
+      <property name="databaseName" value="base_medecin_ed"></property>
+      <property name="portNumber" value="3306"></property>
+      <property name="user" value="root"></property>
+      <property name="password" value="root*"></property>
+    </jdbc-connection-pool>
+    <jdbc-resource pool-name="DBMEDPool" description="" jndi-name="jdbc/base_medecin_ed_JNDI"></jdbc-resource>
+    <jdbc-resource pool-name="DBMEDPool" description="" jndi-name="jdbc/base_medecin_ed__pm"></jdbc-resource>
+  </resources>
+</domain>
